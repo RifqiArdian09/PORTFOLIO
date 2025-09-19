@@ -324,122 +324,157 @@
         </div>
         
         <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-            <div class="aspect-video overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=1200&auto=format&fit=crop" alt="Screenshot Landing Page Modern" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-            </div>
-            <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">Landing Page Modern</h3>
-              <p class="text-slate-300 text-sm leading-relaxed">UI clean dengan dark/light mode, desain responsif, dan animasi halus untuk pengalaman modern.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium">HTML</span>
-                <span class="px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium">CSS</span>
-                <span class="px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium">JavaScript</span>
-              </div>
-              <div class="flex gap-3 pt-2">
-                <a href="#" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="Demo Landing Page Modern">
-                  <i class="fas fa-external-link-alt mr-2"></i>
-                  Demo
-                </a>
-                <a href="https://github.com/RifqiArdian09" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-primary-600 rounded-lg text-primary-400 text-sm font-semibold hover:bg-primary-600 hover:text-white transition-colors" aria-label="GitHub Landing Page Modern">
-                  <i class="fab fa-github mr-2"></i>
-                  GitHub
-                </a>
+          <!-- Project 1: News Portal -->
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="assets/projects/Newsportal.png" alt="News Portal Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-xl font-bold text-white mb-2">News Portal</h3>
+                  <p class="text-gray-300 text-sm">A simple and responsive news app with category-based articles and admin management via Filament.</p>
+                </div>
               </div>
             </div>
-          </article>
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-            <div class="aspect-video overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1551281044-8d8d2aa56f2e?q=80&w=1200&auto=format&fit=crop" alt="Screenshot Dashboard Admin" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-            </div>
             <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">Dashboard Admin</h3>
-              <p class="text-slate-300 text-sm leading-relaxed">Dashboard performa tinggi dengan grafik interaktif, tabel dinamis, dan kontrol akses.</p>
               <div class="flex flex-wrap gap-2">
                 <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Laravel</span>
+                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs font-medium">MySQL</span>
                 <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-medium">PHP</span>
-                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs font-medium">MySQL</span>
+                <span class="px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium">Tailwind CSS</span>
+                <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-xs font-medium">Filament</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="#" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="Demo Dashboard Admin">
-                  <i class="fas fa-external-link-alt mr-2"></i>
-                  Demo
-                </a>
-                <a href="https://github.com/RifqiArdian09" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-primary-600 rounded-lg text-primary-400 text-sm font-semibold hover:bg-primary-600 hover:text-white transition-colors" aria-label="GitHub Dashboard Admin">
+                <a href="https://github.com/RifqiArdian09/News-Portal" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub News Portal">
                   <i class="fab fa-github mr-2"></i>
-                  GitHub
+                  View Code
                 </a>
               </div>
             </div>
           </article>
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-            <div class="aspect-video overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Screenshot REST API Service" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+
+          <!-- Project 2: E-Voting -->
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="assets/projects/E-Voting.png" alt="E-Voting Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-xl font-bold text-white mb-2">E-Voting</h3>
+                  <p class="text-gray-300 text-sm">E-Voting is a web-based student council election app with secure token voting and real-time results.</p>
+                </div>
+              </div>
             </div>
             <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">REST API Service</h3>
-              <p class="text-slate-300 text-sm leading-relaxed">API aman dan terstruktur untuk aplikasi mobile dan web, lengkap dengan dokumentasi.</p>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Laravel</span>
+                <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-xs font-medium">Laravel</span>
+                <span class="px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium">Tailwind CSS</span>
+                <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-xs font-medium">Filament</span>
+                <span class="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded-full text-xs font-medium">MySQL</span>
+              </div>
+              <div class="flex gap-3 pt-2">
+                <a href="https://github.com/RifqiArdian09/E-voting.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub E-Voting">
+                  <i class="fab fa-github mr-2"></i>
+                  View Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: BKK -->
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="assets/projects/Bkk.png" alt="BKK Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-xl font-bold text-white mb-2">BKK</h3>
+                  <p class="text-gray-300 text-sm">BKK is a web-based job placement platform built with Laravel, Filament, and Tailwind CSS.</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-xs font-medium">Laravel</span>
+                <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-xs font-medium">Filament</span>
+                <span class="px-3 py-1 bg-primary-600/20 text-primary-400 rounded-full text-xs font-medium">Tailwind CSS</span>
+                <span class="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded-full text-xs font-medium">JavaScript</span>
+                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs font-medium">MySQL</span>
                 <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-medium">PHP</span>
-                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs font-medium">MySQL</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="#" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="Demo REST API Service">
-                  <i class="fas fa-external-link-alt mr-2"></i>
-                  Demo
-                </a>
-                <a href="https://github.com/RifqiArdian09" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-primary-600 rounded-lg text-primary-400 text-sm font-semibold hover:bg-primary-600 hover:text-white transition-colors" aria-label="GitHub REST API Service">
+                <a href="https://github.com/RifqiArdian09/Project-BKK.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub BKK">
                   <i class="fab fa-github mr-2"></i>
-                  GitHub
+                  View Code
                 </a>
               </div>
             </div>
           </article>
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-            <div class="aspect-video overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=1200&auto=format&fit=crop" alt="Screenshot E-Commerce App" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+
+          <!-- Project 4: Celenganku -->
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="assets/projects/Celenganku.jpg" alt="Celenganku Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-xl font-bold text-white mb-2">Celenganku</h3>
+                  <p class="text-gray-300 text-sm">Celenganku is an Android application to help you manage your personal savings with transaction recording features, savings targets, and financial development visualization.</p>
+                </div>
+              </div>
             </div>
             <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">E-Commerce App</h3>
-              <p class="text-slate-300 text-sm leading-relaxed">Aplikasi e-commerce lengkap dengan keranjang belanja, payment gateway, dan admin panel.</p>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Laravel</span>
-                <span class="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded-full text-xs font-medium">Vue.js</span>
-                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs font-medium">MySQL</span>
+                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Java</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="#" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="Demo E-Commerce App">
-                  <i class="fas fa-external-link-alt mr-2"></i>
-                  Demo
-                </a>
-                <a href="https://github.com/RifqiArdian09" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-primary-600 rounded-lg text-primary-400 text-sm font-semibold hover:bg-primary-600 hover:text-white transition-colors" aria-label="GitHub E-Commerce App">
+                <a href="https://github.com/RifqiArdian09/Celenganku.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-pink-600 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub Celenganku">
                   <i class="fab fa-github mr-2"></i>
-                  GitHub
+                  View Code
                 </a>
               </div>
             </div>
           </article>
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-            <div class="aspect-video overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Screenshot Mobile App" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+
+          <!-- Project 5: Food Recipe App -->
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="assets/projects/food.jpg" alt="Food Recipe App Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-xl font-bold text-white mb-2">Food Recipe App 🍽️</h3>
+                  <p class="text-gray-300 text-sm">Android application to display various food recipes using data from TheMealDB.</p>
+                </div>
+              </div>
             </div>
             <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">Mobile App Flutter</h3>
-              <p class="text-slate-300 text-sm leading-relaxed">Aplikasi mobile cross-platform dengan UI modern dan performa optimal untuk Android & iOS.</p>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-medium">Flutter</span>
-                <span class="px-3 py-1 bg-cyan-600/20 text-cyan-400 rounded-full text-xs font-medium">Dart</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-xs font-medium">Firebase</span>
+                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Java</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="#" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="Demo Mobile App">
-                  <i class="fas fa-external-link-alt mr-2"></i>
-                  Demo
-                </a>
-                <a href="https://github.com/RifqiArdian09" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-primary-600 rounded-lg text-primary-400 text-sm font-semibold hover:bg-primary-600 hover:text-white transition-colors" aria-label="GitHub Mobile App">
+                <a href="https://github.com/RifqiArdian09/FoodRecipeApp.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-pink-600 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub Food Recipe App">
                   <i class="fab fa-github mr-2"></i>
-                  GitHub
+                  View Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: Text & Image Translator App -->
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="assets/projects/translator.jpg" alt="Translator App Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-xl font-bold text-white mb-2">Text & Image Translator App</h3>
+                  <p class="text-gray-300 text-sm">Text & Image Translator app is a Java-based Android app that allows users to translate live text or text from images into multiple languages ​​with the help of Google's Gemini AI.</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Java</span>
+              </div>
+              <div class="flex gap-3 pt-2">
+                <a href="https://github.com/RifqiArdian09/Text-Image-Translator.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub Text & Image Translator">
+                  <i class="fab fa-github mr-2"></i>
+                  View Code
                 </a>
               </div>
             </div>
