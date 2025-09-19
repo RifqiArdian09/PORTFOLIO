@@ -1,36 +1,11 @@
 // Portfolio Scripts - Rifqi Ardian
-// - Theme toggle (dark/light) with smooth transitions and persistence
-// - Skills ping-pong marquee animation
+// - Dark mode only design
+// - Skills marquee animation
+// - Mobile menu functionality
 // - Footer year
 
 (function () {
-  const html = document.documentElement;
-  const toggleBtn = document.getElementById('themeToggle');
-  const icon = toggleBtn?.querySelector('.toggle__icon');
-
-  // Initialize theme: localStorage > prefers-color-scheme > default (dark)
-  const stored = localStorage.getItem('theme');
-  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-
-  function applyTheme(mode) {
-    if (mode === 'light') {
-      html.setAttribute('data-theme', 'light');
-    } else {
-      html.removeAttribute('data-theme');
-    }
-  }
-
-  const initial = stored || (prefersLight ? 'light' : 'dark');
-  applyTheme(initial);
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      const next = current === 'light' ? 'dark' : 'light';
-      applyTheme(next);
-      try { localStorage.setItem('theme', next); } catch {}
-    });
-  }
+  // Dark mode only - clean and focused design
 
   // Footer year
   const yearEl = document.getElementById('year');
@@ -38,48 +13,63 @@
 
   // Mobile menu functionality
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-  const navMenu = document.getElementById('navMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
   
-  if (mobileMenuToggle && navMenu) {
+  if (mobileMenuToggle && mobileMenu) {
     mobileMenuToggle.addEventListener('click', () => {
-      const isActive = navMenu.classList.contains('active');
+      const isHidden = mobileMenu.classList.contains('hidden');
       
-      if (isActive) {
-        navMenu.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        navMenu.classList.add('active');
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
         mobileMenuToggle.classList.add('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        // Change icon to X
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-times';
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        // Change icon back to hamburger
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
       }
     });
 
     // Close mobile menu when clicking on nav links
-    const navLinks = navMenu.querySelectorAll('a');
+    const navLinks = mobileMenu.querySelectorAll('a');
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+        mobileMenu.classList.add('hidden');
         mobileMenuToggle.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        // Change icon back to hamburger
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
       });
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (!mobileMenuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
+      if (!mobileMenuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
         mobileMenuToggle.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        // Change icon back to hamburger
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
       }
     });
 
     // Close mobile menu on window resize if desktop size
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
-        navMenu.classList.remove('active');
+        mobileMenu.classList.add('hidden');
         mobileMenuToggle.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        // Change icon back to hamburger
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
       }
     });
   }
@@ -176,6 +166,7 @@
   // Initialize typing animations
   const titleEl = document.getElementById('hero-title');
   const subtitleEl = document.getElementById('hero-subtitle');
+  const descEl = document.querySelector('.hero__desc');
   
   if (titleEl && subtitleEl) {
     // Type title once
@@ -187,26 +178,40 @@
       startDelay: 800
     });
     
-    // Type subtitle with multiple strings
+    // Type subtitle with single string, loop with pause before repeating
     setTimeout(() => {
       subtitleEl.style.opacity = '1';
       createTypedAnimation(subtitleEl, {
         strings: [
-          "Junior Fullstack Dev",
-          "Building modern web apps",
-          "Creating beautiful UX/UI",
-          "Passionate about clean code",
-          "Always learning new tech"
+          "Junior Fullstack Developer"
         ],
         typeSpeed: 60,
         backSpeed: 40,
-        backDelay: 2000,
+        backDelay: 1500,
         startDelay: 500,
         loop: true,
         showCursor: true,
-        smartBackspace: true
+        smartBackspace: false
       });
     }, 2000);
+
+    // Description typing animation: loop with short pause
+    if (descEl) {
+      const originalDesc = descEl.textContent?.trim() || '';
+      // Start a bit after subtitle begins
+      setTimeout(() => {
+        createTypedAnimation(descEl, {
+          strings: [originalDesc],
+          typeSpeed: 24,
+          backSpeed: 18,
+          backDelay: 1800,
+          startDelay: 500,
+          loop: true,
+          showCursor: false,
+          smartBackspace: false
+        });
+      }, 2500);
+    }
   }
 
   // WhatsApp Contact Form Submission
@@ -232,15 +237,7 @@
     });
   }
 
-  // Skills marquee continuous (two rows, icons only)
-  const ICONS = [
-    'assets/icons/mysql.svg',
-    'assets/icons/php.svg',
-    'assets/icons/postman.svg',
-    'assets/icons/python.svg',
-    'assets/icons/tailwind.svg',
-    'assets/icons/vscode.svg',
-  ];
+
 
   function setupRow(rowEl, icons, direction = 'left', baseSpeed = 60) {
     if (!rowEl) return;
@@ -337,5 +334,117 @@
 
     setupRow(row1, first.length ? first : ICONS, 'left', 70);
     setupRow(row2, second.length ? second : ICONS, 'right', 70);
+  }
+
+  // Reveal on scroll (fallback if AOS not present)
+  function setupReveal() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = document.querySelectorAll('.section, .card, .hero__wrap, .contact-card, .skill-item, .about-card');
+    targets.forEach(el => el.classList.add('reveal'));
+
+    if (prefersReduced) {
+      targets.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+
+    targets.forEach(el => io.observe(el));
+  }
+
+  // Initialize AOS if available; otherwise use custom reveal
+  function initAOS() {
+    if (!window.AOS) return false;
+
+    // Assign AOS attributes programmatically
+    const map = [
+      ['.hero__wrap', 'fade-up'],
+      ['.section__head', 'fade-up'],
+      ['.card', 'fade-up'],
+      ['.contact-card', 'fade-up'],
+      ['.skill-item', 'zoom-in'],
+      ['.about-card', 'fade-up']
+    ];
+    for (const [sel, anim] of map) {
+      document.querySelectorAll(sel).forEach((el, idx) => {
+        el.setAttribute('data-aos', anim);
+        el.setAttribute('data-aos-delay', String(Math.min(200, idx * 50)));
+      });
+    }
+
+    window.AOS.init({
+      once: true,
+      duration: 700,
+      easing: 'ease-out-cubic',
+      offset: 80,
+      mirror: false
+    });
+    return true;
+  }
+
+  function initRevealOrAOS() {
+    const usedAOS = initAOS();
+    if (!usedAOS) setupReveal();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initRevealOrAOS();
+      setupProjectsToggle();
+    });
+  } else {
+    initRevealOrAOS();
+    setupProjectsToggle();
+  }
+
+  // Projects: show more/less toggle
+  function setupProjectsToggle() {
+    const grid = document.getElementById('projectsGrid');
+    const btn = document.getElementById('toggleProjectsBtn');
+    if (!grid || !btn) return;
+
+    const cards = grid.querySelectorAll('article');
+    const wrapper = btn.parentElement;
+    if (cards.length <= 3) {
+      // Hide toggle if not needed
+      wrapper && (wrapper.style.display = 'none');
+      return;
+    }
+
+    // Show only first 3 cards initially
+    cards.forEach((card, index) => {
+      if (index >= 3) {
+        card.style.display = 'none';
+      }
+    });
+
+    let isExpanded = false;
+    btn.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      
+      cards.forEach((card, index) => {
+        if (index >= 3) {
+          card.style.display = isExpanded ? 'block' : 'none';
+        }
+      });
+      
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.className = isExpanded ? 'fas fa-eye-slash mr-2' : 'fas fa-eye mr-2';
+      }
+      btn.childNodes[1].textContent = isExpanded ? ' Tutup' : ' Lihat Semua';
+      
+      // Refresh AOS when expanding
+      if (isExpanded && window.AOS?.refresh) {
+        setTimeout(() => window.AOS.refresh(), 50);
+      }
+    });
   }
 })();
