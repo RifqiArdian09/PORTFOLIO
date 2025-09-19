@@ -58,6 +58,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="font-inter bg-slate-900 text-white overflow-x-hidden">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader fixed inset-0 z-[100] flex items-center justify-center">
+      <!-- Decorative background blobs -->
+      <div class="preloader__bg" aria-hidden="true">
+        <span class="blob blob--1"></span>
+        <span class="blob blob--2"></span>
+        <span class="blob blob--3"></span>
+      </div>
+      <!-- Glass card -->
+      <div class="preloader__card glass-dark text-center">
+        <div class="preloader__logo">
+          <i class="fas fa-code"></i>
+        </div>
+        <h2 class="preloader__title">Preparing Portfolio</h2>
+        <p class="preloader__subtitle">Loading assets and animations</p>
+        <div class="preloader__percent" id="preloaderPercent">0%</div>
+        <div class="preloader__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="preloaderBar" class="preloader__barFill"></div>
+          <div class="preloader__shimmer" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
     <!-- Background Gradients -->
     <div class="fixed inset-0 -z-10">
       <div class="absolute top-0 left-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl"></div>
@@ -65,23 +87,23 @@
     </div>
 
     <!-- Navigation -->
-    <header class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-4xl px-4" aria-label="Primary">
-      <nav class="glass-dark rounded-full px-6 py-3 flex items-center justify-between" role="navigation" aria-label="Navigasi Utama">
-        <a href="#home" class="flex items-center justify-center w-10 h-10 bg-primary-600 rounded-full text-white font-bold hover:scale-105 transition-transform" aria-label="Beranda Rifqi Ardian">
+    <header class="fixed top-4 sm:top-5 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-3xl px-3 sm:px-4" aria-label="Primary">
+      <nav class="glass-dark rounded-2xl sm:rounded-full px-4 py-2 sm:px-6 sm:py-3 flex items-center justify-between relative" role="navigation" aria-label="Navigasi Utama">
+        <a href="#home" class="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-primary-600 rounded-full text-white font-bold hover:scale-105 transition-transform" aria-label="Beranda Rifqi Ardian">
           <i class="fas fa-code"></i>
         </a>
         
-        <ul class="hidden md:flex items-center space-x-8" id="navMenu">
-          <li><a href="#home" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2">
-            <i class="fas fa-home text-sm"></i>
+        <ul class="hidden md:flex items-center space-x-4 sm:space-x-6 lg:space-x-8" id="navMenu">
+          <li><a href="#home" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2 text-sm sm:text-[15px] lg:text-base">
+            <i class="fas fa-home text-xs sm:text-sm"></i>
             <span>Home</span>
           </a></li>
-          <li><a href="#about" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2">
-            <i class="fas fa-user text-sm"></i>
+          <li><a href="#about" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2 text-sm sm:text-[15px] lg:text-base">
+            <i class="fas fa-user text-xs sm:text-sm"></i>
             <span>About</span>
           </a></li>
-          <li><a href="#skills" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2">
-            <i class="fas fa-code text-sm"></i>
+          <li><a href="#skills" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2 text-sm sm:text-[15px] lg:text-base">
+            <i class="fas fa-code text-xs sm:text-sm"></i>
             <span>Skills</span>
           </a></li>
           <li><a href="#projects" class="text-white/80 hover:text-white transition-colors flex items-center space-x-2">
@@ -94,54 +116,55 @@
           </a></li>
         </ul>
         <div class="flex items-center">
-          <button id="mobileMenuToggle" class="md:hidden w-10 h-10 rounded-lg glass-dark flex items-center justify-center" aria-label="Tampil/sembunyikan menu" aria-expanded="false">
-            <i class="fas fa-bars"></i>
+          <button id="mobileMenuToggle" class="md:hidden w-11 h-11 rounded-full flex items-center justify-center bg-primary-600 text-white shadow-md active:scale-95 transition-transform" aria-label="Tampil/sembunyikan menu" aria-expanded="false">
+            <i class="fas fa-bars text-base"></i>
           </button>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="md:hidden mt-4 glass-dark rounded-2xl p-6 hidden">
+        <div id="mobileMenu" class="md:hidden absolute top-full right-3 sm:right-4 mt-3 glass-dark rounded-2xl p-4 w-56 hidden shadow-xl z-50">
           <ul class="space-y-4">
-            <li><a href="#home" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3">
+            <li><a href="#home" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3 text-sm">
               <i class="fas fa-home"></i>
               <span>Home</span>
             </a></li>
-            <li><a href="#about" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3">
+            <li><a href="#about" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3 text-sm">
               <i class="fas fa-user"></i>
               <span>About</span>
             </a></li>
-            <li><a href="#skills" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3">
+            <li><a href="#skills" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3 text-sm">
               <i class="fas fa-code"></i>
               <span>Skills</span>
             </a></li>
-            <li><a href="#projects" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3">
+            <li><a href="#projects" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3 text-sm">
               <i class="fas fa-briefcase"></i>
               <span>Projects</span>
             </a></li>
-            <li><a href="#contact" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3">
+            <li><a href="#contact" class="text-white/80 hover:text-white transition-colors flex items-center space-x-3 text-sm">
               <i class="fas fa-envelope"></i>
               <span>Contact</span>
             </a></li>
           </ul>
         </div>
       </nav>
-    </header>
+    </header
+>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20">
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-28 sm:pt-32 md:pt-36">
       <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div class="text-center lg:text-left space-y-6">
           <p class="text-primary-400 font-semibold tracking-wider uppercase text-sm">Hello, I'm</p>
           <h1 id="hero-title" class="text-5xl lg:text-7xl font-black text-white">Rifqi Ardian</h1>
           <p id="hero-subtitle" class="text-2xl lg:text-3xl font-bold text-primary-400 typing-cursor">Junior Fullstack Developer</p>
-          <p class="hero-desc text-lg text-slate-300 max-w-2xl">Suka ngulik dunia IT dan bikin sistem yang membantu menyelesaikan masalah sehari-hari dengan cara yang simpel dan efisien.</p>
+          <p class="hero-desc text-lg text-slate-300 max-w-2xl">Suka belajar hal baru di dunia IT dan menciptakan sistem yang bikin hidup jadi lebih praktis.</p>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full text-white font-semibold hover:scale-105 transition-transform shadow-lg">
+            <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 min-w-[160px] sm:min-w-[180px] bg-gradient-to-r from-primary-600 to-accent-500 rounded-full text-white font-semibold hover:scale-105 transition-transform shadow-lg">
               <i class="fas fa-eye mr-2"></i>
               Projects
             </a>
-            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-600 rounded-full text-primary-400 font-semibold hover:bg-primary-600 hover:text-white transition-colors">
+            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 min-w-[160px] sm:min-w-[180px] border-2 border-primary-600 rounded-full text-primary-400 font-semibold hover:bg-primary-600 hover:text-white transition-colors">
               <i class="fas fa-paper-plane mr-2"></i>
               Contact
             </a>
@@ -165,75 +188,44 @@
             <div class="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary-600/30 shadow-2xl animate-float">
               <img src="assets/profile.jpg" alt="Foto Rifqi Ardian" class="w-full h-full object-cover" />
             </div>
-            <div class="absolute -inset-4 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full opacity-20 blur-xl"></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 lg:py-32 px-4" aria-labelledby="about-title">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 id="about-title" class="text-4xl lg:text-5xl font-bold text-white mb-4">About</h2>
-          <p class="text-slate-400 text-lg">Sekilas tentang saya</p>
-        </div>
-        
-        <div class="grid lg:grid-cols-3 gap-8">
-          <div class="lg:col-span-2 glass-dark rounded-2xl p-8 space-y-6">
-            <h3 class="text-2xl font-bold text-white mb-4">Tentang Saya</h3>
-            <p class="text-slate-300 leading-relaxed">Halo! Saya <strong class="text-white">Rifqi</strong>, suka ngulik dunia IT dan web development. Saya senang bikin sistem yang bisa membantu menyelesaikan masalah sehari-hari dengan cara yang simpel dan efisien.</p>
-            <p class="text-slate-300 leading-relaxed">Di waktu luang, saya eksplorasi teknologi baru, ikut kontribusi open-source, dan terus belajar untuk meningkatkan kualitas kode serta pengalaman pengguna.</p>
-
-            <ul class="space-y-3 mt-6">
-              <li class="flex items-center space-x-3 text-slate-300">
-                <div class="w-5 h-5 rounded-full bg-primary-600 flex items-center justify-center">
-                  <i class="fas fa-check text-xs text-white"></i>
-                </div>
-                <span>Fokus pada pengembangan web modern & REST API</span>
-              </li>
-              <li class="flex items-center space-x-3 text-slate-300">
-                <div class="w-5 h-5 rounded-full bg-primary-600 flex items-center justify-center">
-                  <i class="fas fa-check text-xs text-white"></i>
-                </div>
-                <span>Desain responsif, performa, dan aksesibilitas</span>
-              </li>
-              <li class="flex items-center space-x-3 text-slate-300">
-                <div class="w-5 h-5 rounded-full bg-primary-600 flex items-center justify-center">
-                  <i class="fas fa-check text-xs text-white"></i>
-                </div>
-                <span>Terbiasa dengan Laravel, MySQL, JavaScript</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="glass-dark rounded-2xl p-8">
-            <h3 class="text-2xl font-bold text-white mb-6">Ringkas</h3>
-            <div class="space-y-6">
-              <div class="text-center p-4 bg-slate-800/50 rounded-xl">
-                <div class="text-3xl font-bold text-primary-400">3+</div>
-                <div class="text-slate-400 text-sm">Proyek aktif</div>
-              </div>
-              <div class="text-center p-4 bg-slate-800/50 rounded-xl">
-                <div class="text-3xl font-bold text-primary-400">2 th</div>
-                <div class="text-slate-400 text-sm">Pengalaman</div>
-              </div>
-              <div class="text-center p-4 bg-slate-800/50 rounded-xl">
-                <div class="text-3xl font-bold text-primary-400">10+</div>
-                <div class="text-slate-400 text-sm">Repos publik</div>
-              </div>
-            </div>
+    <section id="about" class="py-16 lg:py-24 px-4" aria-labelledby="about-title">
+      <div class="max-w-4xl mx-auto">
+        <!-- About Text -->
+        <div class="space-y-6 about-card">
+          <div class="text-left">
+            <h2 id="about-title" class="text-4xl lg:text-5xl font-bold text-white mb-4 text-center">
+              About <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Me</span>
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Halo, saya Rifqi Ardian. Saya belajar di <span class="font-semibold">SMKN 1 Kota Bengkulu</span>, jurusan <span class="font-semibold">Pengembangan Perangkat Lunak dan Gim (PPLG)</span>.
+              Saya fokus pada pengembangan aplikasi web dan mobile, serta senang membangun produk yang sederhana, cepat, dan bermanfaat.
+              Perhatian saya terutama pada <span class="text-primary-400 font-semibold">clean code</span>, <span class="text-primary-400 font-semibold">pengalaman pengguna</span>, dan pemecahan masalah yang nyata.
+            </p>
+            <p class="text-slate-300 leading-relaxed">
+              Teknologi yang sering saya gunakan meliputi <span class="font-semibold">Laravel</span>, <span class="font-semibold">Tailwind CSS</span>, dan <span class="font-semibold">MySQL</span> untuk web,
+              serta <span class="font-semibold">Java</span> untuk pengembangan aplikasi Android. Saya juga aktif mengelola kode di GitHub dan terus belajar
+              hal-hal baru agar kualitas proyek semakin baik. Silakan cek bagian <a href="#projects" class="text-primary-400 underline-offset-2 hover:underline">Projects</a>
+              untuk melihat karya saya, atau menuju <a href="#contact" class="text-primary-400 underline-offset-2 hover:underline">Contact</a> jika ingin bekerja sama.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 lg:py-32 px-4" aria-labelledby="skills-title">
+    <section id="skills" class="py-16 lg:py-24 px-4" aria-labelledby="skills-title">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 id="skills-title" class="text-4xl lg:text-5xl font-bold text-white mb-4">Skills</h2>
-          <p class="text-slate-400 text-lg">Teknologi yang saya gunakan</p>
+        <div class="text-center mb-12">
+          <h2 id="skills-title" class="text-4xl lg:text-5xl font-bold text-white mb-4 text-center">
+            My <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Skills</span>
+          </h2> 
+          <p class="text-slate-400 text-lg">Teknologi dan alat yang saya gunakan untuk mewujudkan ide</p>
         </div>
         
         <div class="overflow-hidden" aria-label="Skills and technologies">
@@ -276,10 +268,10 @@
               <img src="assets/icons/flutter.svg" alt="Flutter" class="w-8 h-8" />
             </div>
             <div class="flex items-center justify-center w-16 h-16 glass-dark rounded-xl hover:scale-110 transition-transform">
-              <img src="assets/icons/dart.svg" alt="Dart" class="w-8 h-8" />
+              <img src="assets/icons/dart.png" alt="Dart" />
             </div>
             <div class="flex items-center justify-center w-16 h-16 glass-dark rounded-xl hover:scale-110 transition-transform">
-              <img src="assets/icons/github.svg" alt="GitHub" class="w-8 h-8" />
+              <img src="assets/icons/github_light.svg" alt="GitHub" class="w-8 h-8" />
             </div>
             <div class="flex items-center justify-center w-16 h-16 glass-dark rounded-xl hover:scale-110 transition-transform">
               <img src="assets/icons/git.svg" alt="Git" class="w-8 h-8" />
@@ -316,22 +308,24 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 lg:py-32 px-4" aria-labelledby="projects-title">
+    <section id="projects" class="py-16 lg:py-24 px-4" aria-labelledby="projects-title">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 id="projects-title" class="text-4xl lg:text-5xl font-bold text-white mb-4">Projects</h2>
-          <p class="text-slate-400 text-lg">Beberapa karya terbaru</p>
+        <div class="text-center mb-12">
+          <h2 id="projects-title" class="text-4xl lg:text-5xl font-bold text-white mb-4 text-center">
+            My <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Projects</span>
+          </h2> 
+          <p class="text-slate-400 text-lg">Berikut adalah beberapa proyek terbaru saya yang menunjukkan keterampilan dan kreativitas saya</p>
         </div>
         
         <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Project 1: News Portal -->
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+          <article class="glass-dark rounded-2xl overflow-hidden transition-transform duration-300 group">
             <div class="relative aspect-video overflow-hidden">
-              <img src="assets/projects/Newsportal.png" alt="News Portal Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="assets/projects/Newsportal.png" alt="News Portal Screenshot" class="w-full h-full object-cover transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 class="text-xl font-bold text-white mb-2">News Portal</h3>
-                  <p class="text-gray-300 text-sm">A simple and responsive news app with category-based articles and admin management via Filament.</p>
+                  <p class="text-gray-300 text-sm">Aplikasi berita sederhana dan responsif dengan artikel berdasarkan kategori dan manajemen admin melalui Filament.</p>
                 </div>
               </div>
             </div>
@@ -344,7 +338,7 @@
                 <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-xs font-medium">Filament</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="https://github.com/RifqiArdian09/News-Portal" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub News Portal">
+                <a href="https://github.com/RifqiArdian09/News-Portal" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold transition-transform" aria-label="GitHub News Portal">
                   <i class="fab fa-github mr-2"></i>
                   View Code
                 </a>
@@ -353,13 +347,13 @@
           </article>
 
           <!-- Project 2: E-Voting -->
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+          <article class="glass-dark rounded-2xl overflow-hidden transition-transform duration-300 group">
             <div class="relative aspect-video overflow-hidden">
-              <img src="assets/projects/E-Voting.png" alt="E-Voting Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="assets/projects/E-Voting.png" alt="E-Voting Screenshot" class="w-full h-full object-cover transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 class="text-xl font-bold text-white mb-2">E-Voting</h3>
-                  <p class="text-gray-300 text-sm">E-Voting is a web-based student council election app with secure token voting and real-time results.</p>
+                  <p class="text-gray-300 text-sm">E-Voting adalah aplikasi pemilihan OSIS berbasis web dengan sistem voting token yang aman dan hasil real-time.</p>
                 </div>
               </div>
             </div>
@@ -371,7 +365,7 @@
                 <span class="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded-full text-xs font-medium">MySQL</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="https://github.com/RifqiArdian09/E-voting.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub E-Voting">
+                <a href="https://github.com/RifqiArdian09/E-voting.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold transition-transform" aria-label="GitHub E-Voting">
                   <i class="fab fa-github mr-2"></i>
                   View Code
                 </a>
@@ -380,13 +374,13 @@
           </article>
 
           <!-- Project 3: BKK -->
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+          <article class="glass-dark rounded-2xl overflow-hidden transition-transform duration-300 group">
             <div class="relative aspect-video overflow-hidden">
-              <img src="assets/projects/Bkk.png" alt="BKK Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="assets/projects/Bkk.png" alt="BKK Screenshot" class="w-full h-full object-cover transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 class="text-xl font-bold text-white mb-2">BKK</h3>
-                  <p class="text-gray-300 text-sm">BKK is a web-based job placement platform built with Laravel, Filament, and Tailwind CSS.</p>
+                  <p class="text-gray-300 text-sm">BKK adalah platform penempatan kerja berbasis web yang dibangun dengan Laravel, Filament, dan Tailwind CSS.</p>
                 </div>
               </div>
             </div>
@@ -400,7 +394,7 @@
                 <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-medium">PHP</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="https://github.com/RifqiArdian09/Project-BKK.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub BKK">
+                <a href="https://github.com/RifqiArdian09/Project-BKK.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold transition-transform" aria-label="GitHub BKK">
                   <i class="fab fa-github mr-2"></i>
                   View Code
                 </a>
@@ -409,13 +403,13 @@
           </article>
 
           <!-- Project 4: Celenganku -->
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+          <article class="glass-dark rounded-2xl overflow-hidden transition-transform duration-300 group">
             <div class="relative aspect-video overflow-hidden">
-              <img src="assets/projects/Celenganku.jpg" alt="Celenganku Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="assets/projects/Celenganku.jpg" alt="Celenganku Screenshot" class="w-full h-full object-cover transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 class="text-xl font-bold text-white mb-2">Celenganku</h3>
-                  <p class="text-gray-300 text-sm">Celenganku is an Android application to help you manage your personal savings with transaction recording features, savings targets, and financial development visualization.</p>
+                  <p class="text-gray-300 text-sm">Celenganku adalah aplikasi Android untuk membantu mengelola tabungan pribadi dengan fitur pencatatan transaksi, target tabungan, dan visualisasi perkembangan keuangan.</p>
                 </div>
               </div>
             </div>
@@ -424,7 +418,7 @@
                 <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Java</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="https://github.com/RifqiArdian09/Celenganku.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-pink-600 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub Celenganku">
+                <a href="https://github.com/RifqiArdian09/Celenganku.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold transition-transform" aria-label="GitHub Celenganku">
                   <i class="fab fa-github mr-2"></i>
                   View Code
                 </a>
@@ -433,13 +427,13 @@
           </article>
 
           <!-- Project 5: Food Recipe App -->
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+          <article class="glass-dark rounded-2xl overflow-hidden transition-transform duration-300 group">
             <div class="relative aspect-video overflow-hidden">
-              <img src="assets/projects/food.jpg" alt="Food Recipe App Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="assets/projects/food.jpg" alt="Food Recipe App Screenshot" class="w-full h-full object-cover transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 class="text-xl font-bold text-white mb-2">Food Recipe App 🍽️</h3>
-                  <p class="text-gray-300 text-sm">Android application to display various food recipes using data from TheMealDB.</p>
+                  <p class="text-gray-300 text-sm">Aplikasi Android untuk menampilkan berbagai resep makanan menggunakan data dari TheMealDB.</p>
                 </div>
               </div>
             </div>
@@ -448,7 +442,7 @@
                 <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Java</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="https://github.com/RifqiArdian09/FoodRecipeApp.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-orange-600 to-pink-600 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub Food Recipe App">
+                <a href="https://github.com/RifqiArdian09/FoodRecipeApp.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold transition-transform" aria-label="GitHub Food Recipe App">
                   <i class="fab fa-github mr-2"></i>
                   View Code
                 </a>
@@ -457,13 +451,13 @@
           </article>
 
           <!-- Project 6: Text & Image Translator App -->
-          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300 group">
+          <article class="glass-dark rounded-2xl overflow-hidden transition-transform duration-300 group">
             <div class="relative aspect-video overflow-hidden">
-              <img src="assets/projects/translator.jpg" alt="Translator App Screenshot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="assets/projects/translator.jpg" alt="Translator App Screenshot" class="w-full h-full object-cover transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 class="text-xl font-bold text-white mb-2">Text & Image Translator App</h3>
-                  <p class="text-gray-300 text-sm">Text & Image Translator app is a Java-based Android app that allows users to translate live text or text from images into multiple languages ​​with the help of Google's Gemini AI.</p>
+                  <p class="text-gray-300 text-sm">Aplikasi Text & Image Translator adalah aplikasi Android berbasis Java yang memungkinkan pengguna menerjemahkan teks langsung atau teks dari gambar ke berbagai bahasa dengan bantuan Google Gemini AI.</p>
                 </div>
               </div>
             </div>
@@ -472,7 +466,7 @@
                 <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-xs font-medium">Java</span>
               </div>
               <div class="flex gap-3 pt-2">
-                <a href="https://github.com/RifqiArdian09/Text-Image-Translator.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold hover:scale-105 transition-transform" aria-label="GitHub Text & Image Translator">
+                <a href="https://github.com/RifqiArdian09/Text-Image-Translator.git" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-500 rounded-lg text-white text-sm font-semibold transition-transform" aria-label="GitHub Text & Image Translator">
                   <i class="fab fa-github mr-2"></i>
                   View Code
                 </a>
@@ -491,9 +485,9 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 lg:py-32 px-4" aria-labelledby="contact-title">
+    <section id="contact" class="py-16 lg:py-24 px-4" aria-labelledby="contact-title">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12">
           <h2 id="contact-title" class="text-4xl lg:text-5xl font-bold text-white mb-4">
             Contact <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Me</span>
           </h2>
@@ -522,7 +516,7 @@
                   </div>
                   <div>
                     <p class="text-slate-400 text-sm">Telepon</p>
-                    <p class="text-white font-semibold">+62 895-4126-30703</p>
+                    <p class="text-white font-semibold">+62 851-8291-1840</p>
                   </div>
                 </div>
                 
@@ -532,7 +526,7 @@
                   </div>
                   <div>
                     <p class="text-slate-400 text-sm">Lokasi</p>
-                    <p class="text-white font-semibold">Bengkulu City, Indonesia</p>
+                    <p class="text-white font-semibold">Kota Bengkulu, Indonesia</p>
                   </div>
                 </div>
               </div>
@@ -601,7 +595,7 @@
     <!-- Footer -->
     <footer class="py-8 px-4 border-t border-slate-800">
       <div class="max-w-6xl mx-auto text-center">
-        <p class="text-slate-400">© <span id="year"></span> Rifqi Ardian. Dibuat dengan <span class="text-red-400">❤️</span> dan semangat.</p>
+        <p class="text-slate-400">© <span id="year"></span> Rifqi Ardian. </p>
       </div>
     </footer>
 
