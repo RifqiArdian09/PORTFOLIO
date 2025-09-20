@@ -1,64 +1,81 @@
 (function () {
-  // Dark mode only - clean and focused design
+  // Modal helper for alert messages
+  function createModalController() {
+    const modal = document.getElementById('alertModal');
+    if (!modal) return { open: () => {}, close: () => {} };
+    const okBtn = document.getElementById('alertOkBtn');
+    const overlay = modal.querySelector('[data-modal-close]');
 
-  // Preloader: animate to 90% while loading, finish to 100% on window load
-  (function setupPreloader() {
-    const preloader = document.getElementById('preloader');
-    if (!preloader) return;
-    const bar = document.getElementById('preloaderBar');
-    const label = document.getElementById('preloaderPercent');
-    const barContainer = document.querySelector('.preloader__bar');
-    let progress = 0;
-    let targetWhileLoading = 90; // cap before full load
-    let rafId = 0;
-    let running = true;
-
-    const setProgress = (p) => {
-      progress = Math.max(0, Math.min(100, p));
-      if (bar) bar.style.width = progress + '%';
-      if (label) label.textContent = Math.round(progress) + '%';
-      if (barContainer) barContainer.setAttribute('aria-valuenow', String(Math.round(progress)));
-    };
-
-    // ease out update towards target
-    const tick = () => {
-      if (!running) return;
-      const delta = (targetWhileLoading - progress) * 0.08; // easing
-      if (Math.abs(delta) > 0.05) setProgress(progress + delta);
-      rafId = requestAnimationFrame(tick);
-    };
-    rafId = requestAnimationFrame(tick);
-
-    // Safety: if load takes too long, still advance slowly
-    const safety = setInterval(() => {
-      if (progress < targetWhileLoading - 1) setProgress(progress + 1);
-    }, 400);
-
-    function finish() {
-      targetWhileLoading = 100;
-      // Smoothly animate to 100 then hide
-      const completeInterval = setInterval(() => {
-        if (progress >= 99.5) {
-          setProgress(100);
-          clearInterval(completeInterval);
-          running = false;
-          cancelAnimationFrame(rafId);
-          clearInterval(safety);
-          preloader.classList.add('is-done');
-          // remove from DOM after transition
-          setTimeout(() => preloader.remove(), 550);
-        } else {
-          setProgress(progress + Math.max(0.6, (100 - progress) * 0.12));
-        }
-      }, 30);
+    function open() {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     }
+    // AOS init moved out of modal controller
+    function close() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    okBtn?.addEventListener('click', close);
+    overlay?.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('hidden') && e.key === 'Escape') close();
+    });
 
-    // Finish on window load
-    window.addEventListener('load', finish, { once: true });
+    return { open, close };
+  }
+  const AlertModal = createModalController();
 
-    // Fallback: hard-finish after 12s
-    setTimeout(finish, 12000);
-  })();
+  // Initialize AOS and attach sensible defaults (global scope)
+  function initAOSIfAvailable() {
+    if (!window.AOS) return;
+
+    // Hero: split columns to opposite directions
+    const heroCols = document.querySelectorAll('#home .max-w-6xl > div');
+    heroCols.forEach((el, idx) => {
+      const anim = idx === 0 ? 'fade-right' : 'fade-left';
+      el.setAttribute('data-aos', anim);
+      el.setAttribute('data-aos-delay', String(idx * 100));
+      el.setAttribute('data-aos-once', 'true');
+    });
+
+    // Section headers
+    document.querySelectorAll('section[aria-labelledby] .text-center').forEach((el, idx) => {
+      el.setAttribute('data-aos', 'fade-up');
+      el.setAttribute('data-aos-delay', String(Math.min(240, idx * 80)));
+      el.setAttribute('data-aos-once', 'true');
+    });
+
+    // Projects: zoom-in-up with stagger
+    document.querySelectorAll('#projectsGrid > article').forEach((el, idx) => {
+      el.setAttribute('data-aos', 'zoom-in-up');
+      el.setAttribute('data-aos-delay', String(Math.min(300, idx * 120)));
+      el.setAttribute('data-aos-once', 'true');
+    });
+
+    // About card
+    document.querySelectorAll('.about-card').forEach((el) => {
+      el.setAttribute('data-aos', 'fade-up');
+      el.setAttribute('data-aos-delay', '100');
+      el.setAttribute('data-aos-once', 'true');
+    });
+
+    // Contact: info left fade-right, form right fade-left
+    const contactCols = document.querySelectorAll('#contact .grid > div');
+    contactCols.forEach((el, idx) => {
+      el.setAttribute('data-aos', idx === 0 ? 'fade-right' : 'fade-left');
+      el.setAttribute('data-aos-delay', String(idx * 120));
+      el.setAttribute('data-aos-once', 'true');
+    });
+
+    window.AOS.init({
+      once: true,
+      duration: 700,
+      easing: 'ease-out-cubic',
+      offset: 80,
+      mirror: false,
+      anchorPlacement: 'top-bottom'
+    });
+  }
 
   // Footer year
   const yearEl = document.getElementById('year');
@@ -240,7 +257,7 @@
   // Initialize typing animations
   const titleEl = document.getElementById('hero-title');
   const subtitleEl = document.getElementById('hero-subtitle');
-  const descEl = document.querySelector('.hero__desc');
+  const descEl = document.querySelector('.hero-desc');
   
   if (titleEl && subtitleEl) {
     // Type title once
@@ -301,7 +318,8 @@
       const message = (fd.get('message') || '').toString().trim();
 
       if (!name || !email || !message) {
-        alert('Mohon lengkapi nama, email, dan pesan.');
+        // Show themed modal instead of native alert
+        AlertModal.open();
         return;
       }
 
@@ -415,9 +433,11 @@
   // Bootstrap essential behaviors only (no AOS/reveal for simplicity and stability)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+      initAOSIfAvailable();
       setupProjectsToggle();
     });
   } else {
+    initAOSIfAvailable();
     setupProjectsToggle();
   }
 

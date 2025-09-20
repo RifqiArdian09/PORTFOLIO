@@ -54,31 +54,10 @@
         }
       }
     </script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="font-inter bg-slate-900 text-white overflow-x-hidden">
-    <!-- Preloader -->
-    <div id="preloader" class="preloader fixed inset-0 z-[100] flex items-center justify-center">
-      <!-- Decorative background blobs -->
-      <div class="preloader__bg" aria-hidden="true">
-        <span class="blob blob--1"></span>
-        <span class="blob blob--2"></span>
-        <span class="blob blob--3"></span>
-      </div>
-      <!-- Glass card -->
-      <div class="preloader__card glass-dark text-center">
-        <div class="preloader__logo">
-          <i class="fas fa-code"></i>
-        </div>
-        <h2 class="preloader__title">Preparing Portfolio</h2>
-        <p class="preloader__subtitle">Loading assets and animations</p>
-        <div class="preloader__percent" id="preloaderPercent">0%</div>
-        <div class="preloader__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div id="preloaderBar" class="preloader__barFill"></div>
-          <div class="preloader__shimmer" aria-hidden="true"></div>
-        </div>
-      </div>
-    </div>
     <!-- Background Gradients -->
     <div class="fixed inset-0 -z-10">
       <div class="absolute top-0 left-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl"></div>
@@ -565,7 +544,7 @@
                 <textarea id="message" name="message" rows="5" class="w-full bg-slate-800/60 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-colors" placeholder="Halo, saya tertarik untuk bekerja sama..." required></textarea>
               </div>
 
-              <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 rounded-lg text-white font-semibold shadow-lg active:scale-[.98] transition">
+              <button type="submit" class="w-full inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-500 hover:to-accent-400 rounded-full text-white font-semibold shadow-lg active:scale-[.98] transition">
                 <span class="mr-2">Kirim</span>
                 <i class="fas fa-paper-plane"></i>
               </button>
@@ -582,6 +561,22 @@
       </div>
     </footer>
 
+    <!-- Modal: Alert -->
+    <div id="alertModal" class="fixed inset-0 z-[100] hidden">
+      <div class="absolute inset-0 bg-black/60" data-modal-close="true"></div>
+      <div class="relative z-[101] max-w-sm w-[92%] mx-auto mt-32 glass-dark rounded-2xl p-6 text-center">
+        <div class="mx-auto mb-3 w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center">
+          <i class="fas fa-exclamation"></i>
+        </div>
+        <h4 class="text-lg font-semibold mb-2">Form Belum Lengkap</h4>
+        <p class="text-slate-300 text-sm">Mohon lengkapi nama, email, dan pesan.</p>
+        <button id="alertOkBtn" class="mt-5 inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full text-white font-semibold shadow-md">
+          Oke
+        </button>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
