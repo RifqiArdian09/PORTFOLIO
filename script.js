@@ -400,84 +400,24 @@
 
   const row1 = document.getElementById('row1');
   const row2 = document.getElementById('row2');
+  // Use a safe fallback to prevent errors if ICONS is not present
+  const ICONS_SAFE = Array.isArray(window.ICONS) ? window.ICONS : [];
   if (row1 && row2) {
     // Split icons between rows (or use same set for both)
-    const half = Math.ceil(ICONS.length / 2);
-    const first = ICONS.slice(0, half);
-    const second = ICONS.slice(half).concat(ICONS.slice(0, Math.max(0, half - (ICONS.length - half))));
+    const half = Math.ceil(ICONS_SAFE.length / 2);
+    const first = ICONS_SAFE.slice(0, half);
+    const second = ICONS_SAFE.slice(half).concat(ICONS_SAFE.slice(0, Math.max(0, half - (ICONS_SAFE.length - half))));
 
-    setupRow(row1, first.length ? first : ICONS, 'left', 70);
-    setupRow(row2, second.length ? second : ICONS, 'right', 70);
+    setupRow(row1, first.length ? first : ICONS_SAFE, 'left', 70);
+    setupRow(row2, second.length ? second : ICONS_SAFE, 'right', 70);
   }
 
-  // Reveal on scroll (fallback if AOS not present)
-  function setupReveal() {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const targets = document.querySelectorAll('.section, .card, .hero__wrap, .contact-card, .skill-item, .about-card');
-    targets.forEach(el => el.classList.add('reveal'));
-
-    if (prefersReduced) {
-      targets.forEach(el => el.classList.add('is-visible'));
-      return;
-    }
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
-
-    targets.forEach(el => io.observe(el));
-  }
-
-  // Initialize AOS if available; otherwise use custom reveal
-  function initAOS() {
-    if (!window.AOS) return false;
-
-    // Assign AOS attributes programmatically to existing elements in index.html
-    const map = [
-      ['#home .max-w-6xl > div', 'fade-up'], // hero columns
-      ['section[aria-labelledby] .text-center', 'fade-up'], // section headers
-      ['#projectsGrid > article', 'fade-up'], // project cards
-      ['#skills .glass-dark.rounded-xl', 'zoom-in'], // skill icon chips
-      ['.about-card', 'fade-up'], // about card wrapper
-      ['#contact .glass-dark.rounded-2xl', 'fade-up'] // contact cards
-    ];
-    for (const [sel, anim] of map) {
-      const nodes = document.querySelectorAll(sel);
-      nodes.forEach((el, idx) => {
-        el.setAttribute('data-aos', anim);
-        el.setAttribute('data-aos-delay', String(Math.min(240, idx * 60)));
-        el.setAttribute('data-aos-once', 'true');
-      });
-    }
-
-    window.AOS.init({
-      once: true,
-      duration: 700,
-      easing: 'ease-out-cubic',
-      offset: 80,
-      mirror: false,
-      anchorPlacement: 'top-bottom'
-    });
-    return true;
-  }
-
-  function initRevealOrAOS() {
-    const usedAOS = initAOS();
-    if (!usedAOS) setupReveal();
-  }
-
+  // Bootstrap essential behaviors only (no AOS/reveal for simplicity and stability)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      initRevealOrAOS();
       setupProjectsToggle();
     });
   } else {
-    initRevealOrAOS();
     setupProjectsToggle();
   }
 
