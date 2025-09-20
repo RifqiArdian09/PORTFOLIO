@@ -25,57 +25,6 @@
   }
   const AlertModal = createModalController();
 
-  // Initialize AOS and attach sensible defaults (global scope)
-  function initAOSIfAvailable() {
-    if (!window.AOS) return;
-
-    // Hero: split columns to opposite directions
-    const heroCols = document.querySelectorAll('#home .max-w-6xl > div');
-    heroCols.forEach((el, idx) => {
-      const anim = idx === 0 ? 'fade-right' : 'fade-left';
-      el.setAttribute('data-aos', anim);
-      el.setAttribute('data-aos-delay', String(idx * 100));
-      el.setAttribute('data-aos-once', 'true');
-    });
-
-    // Section headers
-    document.querySelectorAll('section[aria-labelledby] .text-center').forEach((el, idx) => {
-      el.setAttribute('data-aos', 'fade-up');
-      el.setAttribute('data-aos-delay', String(Math.min(240, idx * 80)));
-      el.setAttribute('data-aos-once', 'true');
-    });
-
-    // Projects: zoom-in-up with stagger
-    document.querySelectorAll('#projectsGrid > article').forEach((el, idx) => {
-      el.setAttribute('data-aos', 'zoom-in-up');
-      el.setAttribute('data-aos-delay', String(Math.min(300, idx * 120)));
-      el.setAttribute('data-aos-once', 'true');
-    });
-
-    // About card
-    document.querySelectorAll('.about-card').forEach((el) => {
-      el.setAttribute('data-aos', 'fade-up');
-      el.setAttribute('data-aos-delay', '100');
-      el.setAttribute('data-aos-once', 'true');
-    });
-
-    // Contact: info left fade-right, form right fade-left
-    const contactCols = document.querySelectorAll('#contact .grid > div');
-    contactCols.forEach((el, idx) => {
-      el.setAttribute('data-aos', idx === 0 ? 'fade-right' : 'fade-left');
-      el.setAttribute('data-aos-delay', String(idx * 120));
-      el.setAttribute('data-aos-once', 'true');
-    });
-
-    window.AOS.init({
-      once: true,
-      duration: 700,
-      easing: 'ease-out-cubic',
-      offset: 80,
-      mirror: false,
-      anchorPlacement: 'top-bottom'
-    });
-  }
 
   // Footer year
   const yearEl = document.getElementById('year');
@@ -430,14 +379,12 @@
     setupRow(row2, second.length ? second : ICONS_SAFE, 'right', 70);
   }
 
-  // Bootstrap essential behaviors only (no AOS/reveal for simplicity and stability)
+  // Bootstrap essential behaviors only (AOS removed)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      initAOSIfAvailable();
       setupProjectsToggle();
     });
   } else {
-    initAOSIfAvailable();
     setupProjectsToggle();
   }
 
@@ -480,10 +427,7 @@
       if (iconEl) iconEl.className = isExpanded ? 'fas fa-eye-slash mr-2' : 'fas fa-eye mr-2';
       if (labelEl) labelEl.textContent = isExpanded ? 'Tutup' : 'Lihat Semua';
       
-      // Refresh AOS when expanding
-      if (isExpanded && window.AOS?.refresh) {
-        setTimeout(() => window.AOS.refresh(), 50);
-      }
+      // AOS removed: no refresh needed
     });
   }
 })();
